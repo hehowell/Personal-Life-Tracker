@@ -14,6 +14,7 @@ export default class CreateExercise extends Component {
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeDuration = this.onChangeDuration.bind(this);
+        this.onChangeDistance = this.onChangeDistance.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
@@ -24,6 +25,7 @@ export default class CreateExercise extends Component {
             username: '',
             description: '',
             duration: 0,
+            distance: 0.0,
             date: new Date(),
             users: []
         }
@@ -62,6 +64,12 @@ export default class CreateExercise extends Component {
         });
     }
 
+    onChangeDistance(e) {
+        this.setState({
+            distance: e.target.value
+        });
+    }
+
     onChangeDate(date) {
         this.setState({
             date: date
@@ -75,6 +83,7 @@ export default class CreateExercise extends Component {
             username: this.state.username,
             description: this.state.description,
             duration: this.state.duration,
+            distance: this.state.distance,
             date: this.state.date
         }
 
@@ -139,6 +148,14 @@ export default class CreateExercise extends Component {
                            className='form-control'
                            value={this.state.duration}
                            onChange={this.onChangeDuration}/>
+                    </div>
+                    <div className='form-group'>
+                        <label>Distance: </label>
+                        <input type="text"
+                           required
+                           className='form-control'
+                           value={this.state.distance}
+                           onChange={this.onChangeDistance}/>
                     </div>
                     <div className='form-group'>
                         <label>Date: </label>

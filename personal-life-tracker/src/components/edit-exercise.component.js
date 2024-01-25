@@ -10,6 +10,7 @@ const EditExercise = () => {
   const [username, setUsername] = useState('');
   const [description, setDescription] = useState('');
   const [duration, setDuration] = useState(0);
+  const [distance, setDistance] = useState(0);
   const [date, setDate] = useState(new Date());
   const [users, setUsers] = useState([]);
 
@@ -19,6 +20,7 @@ const EditExercise = () => {
         setUsername(response.data.username);
         setDescription(response.data.description);
         setDuration(response.data.duration);
+        setDistance(response.data.distance);
         setDate(new Date(response.data.date));
       })
       .catch(error => {
@@ -46,6 +48,10 @@ const EditExercise = () => {
     setDuration(e.target.value);
   };
 
+  const onChangeDistance = (e) => {
+    setDistance(e.target.value);
+  };
+
   const onChangeDate = (newDate) => {
     setDate(newDate);
   };
@@ -57,6 +63,7 @@ const EditExercise = () => {
       username: username,
       description: description,
       duration: duration,
+      distance: distance,
       date: date,
     };
 
@@ -107,6 +114,14 @@ const EditExercise = () => {
                        className='form-control'
                        value={duration}
                        onChange={onChangeDuration}/>
+                </div>
+                <div className='form-group'>
+                    <label>Distance: </label>
+                    <input type="text"
+                       required
+                       className='form-control'
+                       value={distance}
+                       onChange={onChangeDistance}/>
                 </div>
                 <div className='form-group'>
                     <label>Date: </label>
