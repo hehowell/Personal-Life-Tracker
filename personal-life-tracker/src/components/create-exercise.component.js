@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css"
+import sportsOptions from '../sports-options';
 
 export default class CreateExercise extends Component {
+
+    
 
     constructor(props) {
         super(props);
@@ -13,6 +16,8 @@ export default class CreateExercise extends Component {
         this.onChangeDuration = this.onChangeDuration.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+
+        
 
 
         this.state = {
@@ -109,11 +114,23 @@ export default class CreateExercise extends Component {
                     </div>
                     <div className='form-group'>
                         <label>Description: </label>
-                        <input type="text"
-                           required
-                           className='form-control'
-                           value={this.state.description}
-                           onChange={this.onChangeDescription}/>
+                        <select
+                            ref="descriptionInput"
+                            required
+                            className='form-control'
+                            value={this.state.description}
+                            onChange={this.onChangeDescription}
+                        >
+                            {Object.keys(sportsOptions).map((category) => (
+                                <optgroup label={category.match(/[A-Z][a-z]+|[0-9]+/g).join(" ")} key={category}>
+                                    {sportsOptions[category].map((sport) => (
+                                        <option key={sport} value={sport}>
+                                            {sport}
+                                        </option>
+                                    ))}
+                                </optgroup>
+                            ))}
+                        </select>
                     </div>
                     <div className='form-group'>
                         <label>Duration: </label>
