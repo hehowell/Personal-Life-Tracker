@@ -15,6 +15,7 @@ export default class CreateExercise extends Component {
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeDuration = this.onChangeDuration.bind(this);
         this.onChangeDistance = this.onChangeDistance.bind(this);
+        this.onChangeUnit = this.onChangeUnit.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
@@ -26,6 +27,7 @@ export default class CreateExercise extends Component {
             description: '',
             duration: 0,
             distance: 0.0,
+            unit: '',
             date: new Date(),
             users: []
         }
@@ -42,8 +44,6 @@ export default class CreateExercise extends Component {
                 })
             }
         })
-
-
     }
 
     onChangeUsername(e) {
@@ -70,6 +70,12 @@ export default class CreateExercise extends Component {
         });
     }
 
+    onChangeUnit(e) {
+        this.setState({
+            unit: e.target.value
+        });
+    }
+
     onChangeDate(date) {
         this.setState({
             date: date
@@ -84,6 +90,7 @@ export default class CreateExercise extends Component {
             description: this.state.description,
             duration: this.state.duration,
             distance: this.state.distance,
+            unit: this.state.unit,
             date: this.state.date
         }
 
@@ -124,12 +131,13 @@ export default class CreateExercise extends Component {
                     <div className='form-group'>
                         <label>Description: </label>
                         <select
-                            ref="descriptionInput"
+                            useref="descriptionInput"
                             required
                             className='form-control'
                             value={this.state.description}
                             onChange={this.onChangeDescription}
                         >
+                            <option value="" disabled>Select Activity</option>
                             {Object.keys(sportsOptions).map((category) => (
                                 <optgroup label={category.match(/[A-Z][a-z]+|[0-9]+/g).join(" ")} key={category}>
                                     {sportsOptions[category].map((sport) => (
@@ -151,11 +159,24 @@ export default class CreateExercise extends Component {
                     </div>
                     <div className='form-group'>
                         <label>Distance: </label>
-                        <input type="text"
-                           required
-                           className='form-control'
-                           value={this.state.distance}
-                           onChange={this.onChangeDistance}/>
+                        <div className='input-group'>
+                            <input
+                                type="text"
+                                required
+                                className='form-control'
+                                value={this.state.distance.value}
+                                onChange={this.onChangeDistance}
+                            />
+                            <select useref="unitInput"
+                            required
+                            className='form-control'
+                            value={this.state.unit}
+                            onChange={this.onChangeUnit}>
+                            <option value="" disabled>Select Unit</option>
+                            <option>Miles</option>
+                            <option>Kilometers</option>
+                            </select>
+                        </div>
                     </div>
                     <div className='form-group'>
                         <label>Date: </label>

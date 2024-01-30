@@ -34,7 +34,6 @@ const sportsOptions = {
       'Snowshoe',
     ],
     OtherSports: [
-      'Badminton',
       'Golf',
       'Handcycle',
       'Inline Skate',

@@ -15,6 +15,7 @@ router.route('/add').post((req, res) => {
     const description = req.body.description;
     const duration = Number(req.body.duration);
     const distance = Number(req.body.distance);
+    const unit = req.body.unit;
     const date = Date.parse(req.body.date);
 
     const newExercise = new Exercise({
@@ -22,6 +23,7 @@ router.route('/add').post((req, res) => {
         description,
         duration,
         distance,
+        unit,
         date,
     });
 
@@ -52,6 +54,7 @@ router.route('/update/:id').post((req, res) => {
             exercise.description = req.body.description;
             exercise.duration = Number(req.body.duration);
             exercise.distance = Number(req.body.distance);
+            exercise.unit = req.body.unit;
             exercise.date = Date.parse(req.body.date);
 
             exercise.save()
